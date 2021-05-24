@@ -29,7 +29,7 @@
         
 </table>
 
-<a href="logout.php" class="btn">Logout</a>
+<a href="logout.php" class="btn btn-primary">Logout</a>
 
 
 </div>
