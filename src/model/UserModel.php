@@ -25,14 +25,13 @@ class UserModel
     {
 
         try {
-            $pdostm = $this->conn->prepare('INSERT INTO User (firstName,lastName,email,birthday,hobby,password)
+            $pdostm = $this->conn->prepare('INSERT INTO User (firstName,lastName,email,birthday,password)
             VALUES (:firstName,:lastName,:email,:birthday,:hobby,:password);');
 
             $pdostm->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STR);
             $pdostm->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
             $pdostm->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
             $pdostm->bindValue(':birthday', $user->getBirthday(), PDO::PARAM_STR);
-            $pdostm->bindValue(':hobby', $user->getHobby(), PDO::PARAM_STR);
             $pdostm->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
 
             $pdostm->execute();
@@ -109,10 +108,19 @@ class UserModel
             return false;
         } else if($pdostm->rowCount() === 1){
             return true;
+        } 
+    }
+
+    public function logIn($username, $password) {
+        foreach($this->readAll() as $user) {
+            if($username == $user->getEmail() && md5($password) == $user->getPassword()){
+                return $user;
+            }
         }
+    }
 
-
-      
-  
+    public function logOut(){
+        session_start();
+        unset($_SESSION['loggedIn']);
     }
 }

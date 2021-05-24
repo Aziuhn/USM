@@ -10,15 +10,13 @@ class User {
     private $lastName;
     private $email;
     private $birthday;
-    private $hobby;
     private $password;
 
-    public function __construct($firstName,$lastName,$email,$birthday,$hobby,$password) {
+    public function __construct($firstName,$lastName,$email,$birthday,$password) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->birthday = $birthday;
-        $this->hobby = $hobby;
         $this->password = $password;
     }
 
@@ -78,18 +76,6 @@ class User {
     public function setBirthday($birthday)
     {
         $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    public function getHobby()
-    {
-        return $this->hobby;
-    }
- 
-    public function setHobby($hobby)
-    {
-        $this->hobby = $hobby;
 
         return $this;
     }
